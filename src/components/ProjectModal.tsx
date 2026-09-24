@@ -45,30 +45,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-black/60 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto glass-panel rounded-3xl border border-white/15 p-6 sm:p-8 shadow-2xl text-left bg-[#090D1A]"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-[#F3D6E5] p-6 sm:p-8 shadow-2xl text-left bg-white/95 backdrop-blur-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-start justify-between pb-6 border-b border-white/10">
+        <div className="flex items-start justify-between pb-6 border-b border-[#F3D6E5]">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6366F1]/15 border border-[#6366F1]/30 text-xs font-mono text-[#06B6D4] mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF1F7] border border-[#FBCFE8] text-xs font-mono font-bold text-[#DB2777] mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#EC4899]" />
               <span>{project.category}</span>
             </div>
-            <h2 id="modal-title" className="text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 id="modal-title" className="text-2xl sm:text-3xl font-extrabold text-[#18181B]">
               {project.title}
             </h2>
-            <p className="text-sm sm:text-base text-slate-300 mt-1">{project.subtitle}</p>
+            <p className="text-sm sm:text-base text-[#52525B] mt-1">{project.subtitle}</p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2.5 rounded-full glass-panel border border-white/10 text-slate-400 hover:text-white hover:border-white/30 transition-all cursor-pointer"
+            className="p-2.5 rounded-full bg-white border border-[#F3D6E5] text-[#52525B] hover:text-[#EC4899] hover:border-[#EC4899]/50 transition-all cursor-pointer shadow-xs"
             aria-label="Close project modal"
+            data-cursor="interactive"
           >
             <X className="w-5 h-5" />
           </button>
@@ -78,157 +79,137 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         <div className="py-6 space-y-8">
           {/* Project Demo Video Area */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
-              <Video className="w-4 h-4" />
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-3 flex items-center gap-2">
+              <Video className="w-4 h-4 text-[#EC4899]" />
               <span>Project Demo Walkthrough</span>
             </h3>
             <VideoDemo
               projectTitle={project.title}
               videoUrl={modalDetails.videoDemoUrl}
               posterUrl={modalDetails.posterUrl}
-              accentColor={project.themeColor}
             />
           </div>
 
           {/* Overview */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-2 flex items-center gap-2">
-              <BookOpen className="w-4 h-4" />
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-2 flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-[#EC4899]" />
               <span>Project Overview</span>
             </h3>
-            <p className="text-slate-200 leading-relaxed text-sm sm:text-base">
+            <p className="text-[#18181B] leading-relaxed text-sm sm:text-base font-normal">
               {modalDetails.overview}
             </p>
           </div>
 
           {/* Problem & Solution Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-              <h4 className="text-sm font-mono text-rose-400 font-semibold mb-2 flex items-center gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-5 rounded-2xl bg-[#FFF8FC] border border-[#F3D6E5]">
+              <div className="flex items-center gap-2 text-rose-500 font-bold text-xs uppercase font-mono mb-2">
                 <AlertTriangle className="w-4 h-4" />
-                <span>Problem</span>
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <span>The Engineering Challenge</span>
+              </div>
+              <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">
                 {modalDetails.problem}
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#6366F1]/10 border border-[#6366F1]/30">
-              <h4 className="text-sm font-mono text-emerald-400 font-semibold mb-2 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Solution</span>
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <div className="p-5 rounded-2xl bg-[#FFF1F7] border border-[#FBCFE8]">
+              <div className="flex items-center gap-2 text-[#DB2777] font-bold text-xs uppercase font-mono mb-2">
+                <Lightbulb className="w-4 h-4 text-[#EC4899]" />
+                <span>Technical Solution Architecture</span>
+              </div>
+              <p className="text-xs sm:text-sm text-[#18181B] leading-relaxed">
                 {modalDetails.solution}
               </p>
             </div>
           </div>
 
-          {/* AI Components (Special Focus) */}
-          {modalDetails.aiComponents && modalDetails.aiComponents.length > 0 && (
-            <div className="p-5 rounded-2xl bg-cyan-950/20 border border-[#06B6D4]/30">
-              <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2 font-bold">
-                <BrainCircuit className="w-4 h-4 text-[#06B6D4]" />
-                <span>AI Architecture &amp; Integrations</span>
+          {/* Architecture Overview */}
+          {modalDetails.architecture && (
+            <div>
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-3 flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-[#EC4899]" />
+                <span>Architecture Overview</span>
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {modalDetails.aiComponents.map((aiComp, idx) => (
+              <p className="text-xs sm:text-sm text-[#18181B] leading-relaxed p-4 rounded-xl bg-[#FFF8FC] border border-[#F3D6E5]">
+                {modalDetails.architecture}
+              </p>
+            </div>
+          )}
+
+          {/* Key Features */}
+          {modalDetails.features && modalDetails.features.length > 0 && (
+            <div>
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <span>Key Features</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {modalDetails.features.map((feature: string, idx: number) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-cyan-200"
+                    className="p-3.5 rounded-xl bg-white border border-[#F3D6E5] flex items-start gap-2.5 shadow-xs"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
-                    <span>{aiComp}</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm text-[#18181B] leading-relaxed">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Key Features */}
-          <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
-              <Layers className="w-4 h-4" />
-              <span>Key Features</span>
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {modalDetails.features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5 border border-white/10"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-slate-200">{feature}</span>
-                </div>
-              ))}
+          {/* AI Components Deep-Dive */}
+          {modalDetails.aiComponents && modalDetails.aiComponents.length > 0 && (
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-[#FFF1F7] via-white to-[#FFF8FC] border border-[#FBCFE8]">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-3 flex items-center gap-2">
+                <BrainCircuit className="w-4 h-4 text-[#EC4899]" />
+                <span>AI Engineering &amp; Model Integration</span>
+              </h3>
+              <ul className="space-y-2">
+                {modalDetails.aiComponents.map((cap: string, idx: number) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-[#18181B]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899] mt-2 shrink-0"></span>
+                    <span className="leading-relaxed">{cap}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          )}
 
-          {/* Technologies Used */}
+          {/* Detailed Tech Stack Badges */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
-              <Cpu className="w-4 h-4" />
-              <span>Technologies</span>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-bold mb-3 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#EC4899]" />
+              <span>Full Technology Stack</span>
             </h3>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
+              {modalDetails.technologies.map((tech: string) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-white/5 border border-white/15 text-slate-200"
+                  className="px-3 py-1 rounded-xl bg-[#FFF8FC] border border-[#F3D6E5] text-xs font-mono font-medium text-[#18181B] shadow-xs"
                 >
                   {tech}
                 </span>
               ))}
             </div>
           </div>
-
-          {/* Architecture */}
-          <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-300 mb-2 flex items-center gap-2">
-              <Cpu className="w-4 h-4" />
-              <span>Architecture</span>
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              {modalDetails.architecture}
-            </p>
-          </div>
-
-          {/* Challenges & What I Learned */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-              <h4 className="text-sm font-mono text-amber-300 font-semibold mb-2 flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Technical Challenges</span>
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {modalDetails.challenges}
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-              <h4 className="text-sm font-mono text-[#06B6D4] font-semibold mb-2 flex items-center gap-2">
-                <Lightbulb className="w-4 h-4" />
-                <span>What I Learned</span>
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {modalDetails.whatILearned}
-              </p>
-            </div>
-          </div>
         </div>
 
-        {/* Footer Actions */}
-        <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+        {/* Modal Footer Links */}
+        <div className="pt-6 border-t border-[#F3D6E5] flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white glass-panel border border-white/20 hover:border-white"
+                className="px-4 py-2 rounded-xl bg-white border border-[#F3D6E5] text-xs font-mono font-semibold text-[#18181B] hover:text-[#EC4899] hover:border-[#EC4899]/50 flex items-center gap-2 transition-all shadow-xs"
+                data-cursor="interactive"
               >
                 <GitHubIcon className="w-4 h-4" />
-                <span>GitHub Repository</span>
+                <span>Repository</span>
               </a>
             )}
 
@@ -237,19 +218,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-[#6366F1] to-[#06B6D4]"
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#EC4899] to-[#F472B6] text-white text-xs font-mono font-semibold flex items-center gap-2 shadow-md shadow-pink-500/20 hover:scale-105 transition-all"
+                data-cursor="interactive"
               >
                 <ExternalLink className="w-4 h-4" />
-                <span>Live Demo</span>
+                <span>Live Application</span>
               </a>
             )}
           </div>
 
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-xl text-xs font-semibold text-white glass-panel border border-white/20 hover:bg-white/10 transition-colors ml-auto cursor-pointer"
+            className="px-5 py-2 rounded-xl bg-[#FFF1F7] text-xs font-mono font-semibold text-[#DB2777] border border-[#FBCFE8] hover:bg-[#FCE7F3] transition-colors cursor-pointer"
+            data-cursor="interactive"
           >
-            Close Case Study
+            Close Details
           </button>
         </div>
       </div>

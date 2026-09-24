@@ -2,27 +2,17 @@
 
 @layer base {
   :root {
-    --bg-base: #050816;
-    --bg-surface: #0b1120;
-    --bg-card: rgba(11, 17, 32, 0.75);
-    --border-card: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(99, 102, 241, 0.4);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent-indigo: #6366f1;
-    --accent-cyan: #06b6d4;
-  }
-
-  html:not(.dark) {
-    --bg-base: #f8fafc;
-    --bg-surface: #f1f5f9;
-    --bg-card: rgba(255, 255, 255, 0.9);
-    --border-card: rgba(0, 0, 0, 0.08);
-    --border-hover: rgba(99, 102, 241, 0.4);
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --accent-indigo: #4f46e5;
-    --accent-cyan: #0891b2;
+    --bg-base: #ffffff;
+    --bg-surface: #fff8fc;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --border-card: #f3d6e5;
+    --border-hover: rgba(236, 72, 153, 0.5);
+    --text-main: #18181b;
+    --text-muted: #52525b;
+    --accent-primary: #ec4899;
+    --accent-secondary: #f472b6;
+    --accent-soft: #fbceea;
+    --accent-dark: #db2777;
   }
 
   * {
@@ -39,70 +29,105 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: #fff8fc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #fbcfe8;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #f472b6;
 }
 
-/* Glassmorphism utilities */
+/* Premium Light Glassmorphism */
 .glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-card);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #f3d6e5;
+  box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+.glass-panel:hover {
+  border-color: rgba(236, 72, 153, 0.45);
+  box-shadow: 0 20px 40px -12px rgba(236, 72, 153, 0.16);
 }
 
 .glass-nav {
-  background: rgba(5, 8, 22, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #f3d6e5;
+  box-shadow: 0 4px 20px -2px rgba(236, 72, 153, 0.06);
 }
 
-html:not(.dark) .glass-nav {
-  background: rgba(248, 250, 252, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+/* Glowing Pink Effects */
+.glow-pink-sm {
+  box-shadow: 0 0 25px -4px rgba(236, 72, 153, 0.35);
 }
 
-/* Glowing accent effects */
-.glow-box-indigo {
-  box-shadow: 0 0 35px -5px rgba(99, 102, 241, 0.25);
+.glow-pink-lg {
+  box-shadow: 0 0 50px -10px rgba(236, 72, 153, 0.3);
 }
 
-.glow-box-cyan {
-  box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.25);
+.glow-text-pink {
+  text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
 }
 
-.glow-text-indigo {
-  text-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-}
-
-/* Subtle grid pattern */
+/* Light Subtle Grid Pattern */
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
-
-html:not(.dark) .bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(236, 72, 153, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(236, 72, 153, 0.04) 1px, transparent 1px);
 }
 
 /* Code font helper */
 .font-code {
   font-family: 'JetBrains Mono', monospace;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Floating animation for domain tags and badge elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* FadeIn animation for pipeline hover banner */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Gradient border utility for premium cards */
+.gradient-border-pink {
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #EC4899, #F472B6) border-box;
+  border: 2px solid transparent;
+}
+
+/* Text selection override */
+::selection {
+  background: #FCE7F3;
+  color: #DB2777;
 }

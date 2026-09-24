@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -15,50 +15,29 @@ import { Footer } from './components/Footer'
 import { CVModal } from './components/CVModal'
 import { AIAssistantModal } from './components/AIAssistantModal'
 import { AnimatedBackground } from './components/AnimatedBackground'
-import { CursorGlow } from './components/CursorGlow'
+import { CustomCursor } from './components/CustomCursor'
+import { Sparkles } from 'lucide-react'
 
 export function App() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('theme')
-    if (saved) return saved === 'dark'
-    return true // Default dark mode as specified
-  })
-
   const [isCVModalOpen, setIsCVModalOpen] = useState(false)
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false)
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }, [isDarkMode])
-
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev)
-  }
-
   return (
-    <div className="min-h-screen bg-[#050816] text-[#F8FAFC] flex flex-col relative transition-colors duration-300">
-      {/* Animated Subtle Engineering & AI Background */}
+    <div className="min-h-screen bg-[#FFFFFF] text-[#18181B] flex flex-col relative transition-colors duration-300 selection:bg-[#FCE7F3] selection:text-[#DB2777]">
+      {/* Desktop Custom Cursor with VIEW & PLAY states */}
+      <CustomCursor />
+
+      {/* Subtle Animated Technology Background with Pink Glows and Floating AI Network */}
       <AnimatedBackground />
 
-      {/* Desktop Ambient Cursor Glow */}
-      <CursorGlow />
-
-      {/* Sticky Top Navbar */}
+      {/* Sticky Top Glass Navbar */}
       <Navbar
-        isDarkMode={isDarkMode}
-        toggleTheme={toggleTheme}
         onOpenAIAssistant={() => setIsAIAssistantOpen(true)}
       />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Smooth Flow */}
       <main className="flex-1 w-full overflow-hidden relative z-10">
-        <Hero isDarkMode={isDarkMode} onOpenCV={() => setIsCVModalOpen(true)} />
+        <Hero onOpenCV={() => setIsCVModalOpen(true)} />
         <About />
         <AIAgentsSection />
         <AIWorkflow />
@@ -78,21 +57,25 @@ export function App() {
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsAIAssistantOpen(true)}
-          className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#06B6D4] text-white font-mono text-xs font-semibold shadow-2xl shadow-cyan-500/30 hover:scale-105 hover:shadow-cyan-500/50 transition-all duration-300 cursor-pointer"
+          className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-white/90 backdrop-blur-xl border border-[#F3D6E5] text-[#18181B] font-mono text-xs font-semibold shadow-xl shadow-pink-500/15 hover:border-[#EC4899] hover:shadow-pink-500/30 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
           aria-label="Ask Mariem's AI"
+          data-cursor="interactive"
         >
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EC4899] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#EC4899]"></span>
           </span>
-          <span>Ask Mariem's AI</span>
+          <span className="font-sans font-bold text-sm tracking-tight text-[#18181B] group-hover:text-[#EC4899] transition-colors flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#EC4899]" />
+            Ask Mariem's AI
+          </span>
         </button>
       </div>
 
       {/* CV Download / Print Modal */}
       <CVModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
 
-      {/* AI Assistant Modal */}
+      {/* Grounded AI Assistant Modal */}
       <AIAssistantModal
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}
@@ -100,5 +83,3 @@ export function App() {
     </div>
   )
 }
-
-export default App

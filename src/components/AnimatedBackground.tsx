@@ -26,57 +26,46 @@ export const AnimatedBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize)
 
-    // Engineering & AI Node points
-    interface NodePoint {
+    // AI Network Nodes and Background Particles
+    interface NetworkNode {
       x: number
       y: number
       vx: number
       vy: number
       radius: number
       label?: string
-      type: 'agent' | 'mcp' | 'db' | 'api' | 'llm' | 'code' | 'dot'
+      isSpecial?: boolean
     }
 
-    const nodeTypes: NodePoint['type'][] = [
-      'agent',
-      'mcp',
-      'db',
-      'api',
-      'llm',
-      'code',
-      'dot',
-    ]
-    const codeSnippets = [
-      'new Agent({ tools })',
-      'chroma.query(bge_m3)',
-      'pipeline.rag()',
-      'mcp.connect()',
-      'deepseek.r1()',
-      '<React.Suspense />',
-      'SELECT * FROM mysql',
-      'docker-compose up',
+    const specialLabels = [
+      'USER',
+      'AI AGENT',
+      'TOOLS',
+      'MCP',
+      'RAG',
+      'DATABASE',
+      'AI MODEL',
+      'API',
+      'REACT',
+      'NODE.JS',
     ]
 
-    const points: NodePoint[] = []
-    const totalNodes = Math.min(Math.floor(width / 35), 45)
+    const nodes: NetworkNode[] = []
+    const totalNodes = Math.min(Math.floor(width / 40), 38)
 
     for (let i = 0; i < totalNodes; i++) {
-      const type = nodeTypes[i % nodeTypes.length]
-      points.push({
+      const isSpecial = i < specialLabels.length
+      nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        radius: type === 'dot' ? 1.5 : 2.5,
-        type,
-        label:
-          type === 'code'
-            ? codeSnippets[i % codeSnippets.length]
-            : undefined,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: isSpecial ? 3.5 : 2,
+        label: isSpecial ? specialLabels[i] : undefined,
+        isSpecial,
       })
     }
 
-    // Mouse tracking for soft interactivity
     let mouseX = width / 2
     let mouseY = height / 2
 
@@ -90,66 +79,59 @@ export const AnimatedBackground: React.FC = () => {
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
 
-      // Connect nearby nodes with subtle lines
-      for (let i = 0; i < points.length; i++) {
-        const p1 = points[i]
+      // Connect nearby nodes with delicate pink lines
+      for (let i = 0; i < nodes.length; i++) {
+        const n1 = nodes[i]
 
-        for (let j = i + 1; j < points.length; j++) {
-          const p2 = points[j]
-          const dx = p1.x - p2.x
-          const dy = p1.y - p2.y
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j]
+          const dx = n1.x - n2.x
+          const dy = n1.y - n2.y
           const dist = Math.sqrt(dx * dx + dy * dy)
 
-          if (dist < 150) {
-            const alpha = (1 - dist / 150) * 0.08
+          if (dist < 160) {
+            const alpha = (1 - dist / 160) * 0.14
             ctx.beginPath()
-            ctx.moveTo(p1.x, p1.y)
-            ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`
+            ctx.moveTo(n1.x, n1.y)
+            ctx.lineTo(n2.x, n2.y)
+            ctx.strokeStyle = `rgba(236, 72, 153, ${alpha})`
             ctx.lineWidth = 1
             ctx.stroke()
           }
         }
 
-        // Draw node
+        // Draw node dot
         ctx.beginPath()
-        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2)
-
-        if (p1.type === 'agent' || p1.type === 'llm') {
-          ctx.fillStyle = 'rgba(6, 182, 212, 0.4)'
-        } else if (p1.type === 'mcp' || p1.type === 'api') {
-          ctx.fillStyle = 'rgba(139, 92, 246, 0.35)'
-        } else {
-          ctx.fillStyle = 'rgba(99, 102, 241, 0.25)'
-        }
+        ctx.arc(n1.x, n1.y, n1.radius, 0, Math.PI * 2)
+        ctx.fillStyle = n1.isSpecial ? 'rgba(236, 72, 153, 0.45)' : 'rgba(244, 114, 182, 0.25)'
         ctx.fill()
 
-        // Render subtle code fragments
-        if (p1.label) {
-          ctx.font = '10px "JetBrains Mono", monospace'
-          ctx.fillStyle = 'rgba(148, 163, 184, 0.16)'
-          ctx.fillText(p1.label, p1.x + 8, p1.y + 3)
+        // Render soft tech label if present
+        if (n1.label) {
+          ctx.font = '9px "JetBrains Mono", monospace'
+          ctx.fillStyle = 'rgba(219, 39, 119, 0.3)'
+          ctx.fillText(n1.label, n1.x + 7, n1.y + 3)
         }
 
-        // Move points unless reduced motion
+        // Move points unless user prefers reduced motion
         if (!prefersReducedMotion) {
-          p1.x += p1.vx
-          p1.y += p1.vy
+          n1.x += n1.vx
+          n1.y += n1.vy
 
-          // Soft mouse repulsion
-          const mdx = p1.x - mouseX
-          const mdy = p1.y - mouseY
+          // Delicate mouse reaction
+          const mdx = n1.x - mouseX
+          const mdy = n1.y - mouseY
           const mdist = Math.sqrt(mdx * mdx + mdy * mdy)
-          if (mdist < 100) {
-            const force = (100 - mdist) / 100
-            p1.x += (mdx / mdist) * force * 0.5
-            p1.y += (mdy / mdist) * force * 0.5
+          if (mdist < 120) {
+            const force = (120 - mdist) / 120
+            n1.x += (mdx / mdist) * force * 0.4
+            n1.y += (mdy / mdist) * force * 0.4
           }
 
-          if (p1.x < 0) p1.x = width
-          if (p1.x > width) p1.x = 0
-          if (p1.y < 0) p1.y = height
-          if (p1.y > height) p1.y = 0
+          if (n1.x < 0) n1.x = width
+          if (n1.x > width) n1.x = 0
+          if (n1.y < 0) n1.y = height
+          if (n1.y > height) n1.y = 0
         }
       }
 
@@ -166,10 +148,13 @@ export const AnimatedBackground: React.FC = () => {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80"
-      aria-hidden="true"
-    />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+      {/* Background Soft Pink Ambient Gradient Blobs */}
+      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#FFF1F7] via-[#FCE7F3]/60 to-transparent blur-[120px]" />
+      <div className="absolute top-1/2 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-[#FCE7F3]/70 via-[#FFF1F7] to-transparent blur-[140px]" />
+      <div className="absolute -bottom-32 left-1/3 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-[#FFF8FC] via-[#FCE7F3]/40 to-transparent blur-[130px]" />
+
+      <canvas ref={canvasRef} className="w-full h-full opacity-80" />
+    </div>
   )
 }
