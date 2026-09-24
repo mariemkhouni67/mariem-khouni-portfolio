@@ -21,12 +21,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onSelect,
   isFeatured = false,
 }) => {
-  // Custom themed visual previews based on the project id
   const renderVisualMockup = () => {
     if (project.id === 'studymate') {
       return (
         <div className="relative w-full h-56 sm:h-64 rounded-2xl bg-gradient-to-br from-slate-950 via-indigo-950/60 to-slate-900 border border-[#6366F1]/30 p-4 sm:p-5 flex flex-col justify-between overflow-hidden group">
-          {/* Neural & Graph Decorative Grids */}
           <div className="absolute inset-0 bg-grid-pattern opacity-30" />
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#6366F1]/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -46,18 +44,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="p-3 rounded-xl bg-slate-900/90 border border-white/10 shadow-lg">
               <div className="text-[10px] font-mono text-[#06B6D4] mb-1">RAG Context Query</div>
               <div className="text-xs text-white font-medium truncate">Course summaries &amp; notes</div>
-              <div className="mt-2 flex items-center gap-1 text-[9px] text-slate-400">
+              <div className="mt-2 flex items-center gap-1 text-[9px] text-slate-400 font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Vector Search active
+                ChromaDB Vector Store
               </div>
             </div>
 
             <div className="p-3 rounded-xl bg-slate-900/90 border border-[#6366F1]/40 shadow-lg">
               <div className="text-[10px] font-mono text-indigo-400 mb-1">Gamified Retention</div>
-              <div className="text-xs text-white font-medium truncate">Adaptive Quizzes &amp; Flashcards</div>
-              <div className="mt-2 flex items-center gap-1 text-[9px] text-emerald-400">
+              <div className="text-xs text-white font-medium truncate">Adaptive Quizzes &amp; Cards</div>
+              <div className="mt-2 flex items-center gap-1 text-[9px] text-emerald-400 font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Streak Tracking ON
+                Streak Tracking Active
               </div>
             </div>
           </div>
@@ -77,34 +75,31 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="absolute inset-0 bg-grid-pattern opacity-30" />
           <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#06B6D4]/20 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Top Bar */}
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-[11px] font-mono text-cyan-300">
               <Compass className="w-3.5 h-3.5 text-[#06B6D4]" />
-              <span>Interactive Leaflet Map &bull; MERN</span>
+              <span>Leaflet Interactive Maps &bull; MERN</span>
             </div>
             <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
               3D Animated Hero
             </span>
           </div>
 
-          {/* Middle: Glassmorphic Booking and Map Preview */}
           <div className="relative z-10 space-y-2 my-auto">
             <div className="p-3 rounded-xl bg-slate-900/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
               <div>
-                <div className="text-[10px] font-mono text-cyan-400">Destination Search &amp; Booking</div>
+                <div className="text-[10px] font-mono text-cyan-400">Destination Discovery &amp; Booking</div>
                 <div className="text-xs text-white font-medium">Real-time reservations &amp; reviews</div>
               </div>
               <span className="text-[10px] font-mono text-emerald-400">CRUD Admin</span>
             </div>
 
             <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-mono text-slate-300">
-              <span>Multilingual Chatbot Assistant</span>
-              <span className="text-[#06B6D4]">&bull; Active</span>
+              <span>Multilingual Conversational Chatbot</span>
+              <span className="text-[#06B6D4]">&bull; Integrated</span>
             </div>
           </div>
 
-          {/* Bottom Bar */}
           <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-white/10">
             <span>MongoDB &bull; Express &bull; React &bull; Node</span>
             <span className="text-cyan-400">Glassmorphic UI</span>
@@ -113,13 +108,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       )
     }
 
-    // Decathlon Posture Coach
     return (
       <div className="relative w-full h-56 sm:h-64 rounded-2xl bg-gradient-to-br from-slate-950 via-blue-950/40 to-slate-900 border border-blue-500/30 p-4 sm:p-5 flex flex-col justify-between overflow-hidden group">
         <div className="absolute inset-0 bg-grid-pattern opacity-30" />
         <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Top Bar */}
         <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-[11px] font-mono text-blue-300">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
@@ -130,20 +123,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </span>
         </div>
 
-        {/* Middle */}
         <div className="relative z-10 space-y-2 my-auto">
           <div className="p-3 rounded-xl bg-slate-900/90 border border-white/10">
-            <div className="text-[10px] font-mono text-sky-400">Personalized Posture Workflows</div>
-            <div className="text-xs text-white font-medium">AI analysis &amp; corrective routine generation</div>
+            <div className="text-[10px] font-mono text-sky-400">Personalized Posture Routine</div>
+            <div className="text-xs text-white font-medium">DeepSeek R1 AI recommendation workflow</div>
           </div>
 
           <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-between text-[10px] font-mono text-slate-200">
             <span>Decathlon Product Matching Engine</span>
-            <span className="text-emerald-400">Linked</span>
+            <span className="text-emerald-400 font-semibold">Matched</span>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-slate-400 pt-2 border-t border-white/10">
           <span>React &bull; TypeScript &bull; Tailwind CSS</span>
           <span className="text-blue-400">Health AI</span>
@@ -159,10 +150,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       }`}
     >
       <div className="p-6 sm:p-8">
-        {/* Visual Mockup Header */}
         <div className="mb-6">{renderVisualMockup()}</div>
 
-        {/* Project Header Info */}
         <div className="mb-4">
           <div className="flex items-center justify-between gap-2 mb-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#06B6D4]">
@@ -170,7 +159,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <span>{project.category}</span>
             </div>
             {isFeatured && (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2.5 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2.5 py-0.5 rounded-full font-mono">
                 Featured Flagship
               </span>
             )}
@@ -190,11 +179,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <span>{desc}</span>
             </div>
           ))}
-          {project.description.length > 4 && (
-            <div className="text-xs text-[#06B6D4] font-mono pt-1">
-              +{project.description.length - 4} more implemented features in details
-            </div>
-          )}
         </div>
 
         {/* Highlights Badges */}
@@ -235,7 +219,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Card Action Bar */}
       <div className="px-6 py-4 sm:px-8 border-t border-white/10 bg-slate-900/40 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          {/* GitHub button (only shown if real URL exists, as strictly instructed) */}
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -248,7 +231,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </a>
           )}
 
-          {/* Live Demo button (only shown if real URL exists) */}
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -262,13 +244,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </div>
 
-        {/* View Details Button */}
         <button
           onClick={() => onSelect(project)}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#6366F1] to-[#06B6D4] hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.02] transition-all cursor-pointer ml-auto"
         >
           <Info className="w-4 h-4" />
-          <span>View Details</span>
+          <span>View Case Study &amp; Demo</span>
         </button>
       </div>
     </div>

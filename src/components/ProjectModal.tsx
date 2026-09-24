@@ -9,9 +9,12 @@ import {
   Lightbulb,
   ExternalLink,
   BookOpen,
+  BrainCircuit,
+  Video,
 } from 'lucide-react'
 import type { Project } from '../data/portfolio'
 import { GitHubIcon } from './SocialIcons'
+import { VideoDemo } from './VideoDemo'
 
 interface ProjectModalProps {
   project: Project | null
@@ -42,11 +45,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/80 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-panel rounded-3xl border border-white/15 p-6 sm:p-8 shadow-2xl text-left"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto glass-panel rounded-3xl border border-white/15 p-6 sm:p-8 shadow-2xl text-left bg-[#090D1A]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -73,9 +76,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
         {/* Modal Body Content */}
         <div className="py-6 space-y-8">
+          {/* Project Demo Video Area */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
+              <Video className="w-4 h-4" />
+              <span>Project Demo Walkthrough</span>
+            </h3>
+            <VideoDemo
+              projectTitle={project.title}
+              videoUrl={modalDetails.videoDemoUrl}
+              posterUrl={modalDetails.posterUrl}
+              accentColor={project.themeColor}
+            />
+          </div>
+
           {/* Overview */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-wider text-[#06B6D4] mb-2 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-2 flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
               <span>Project Overview</span>
             </h3>
@@ -107,9 +124,30 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
           </div>
 
+          {/* AI Components (Special Focus) */}
+          {modalDetails.aiComponents && modalDetails.aiComponents.length > 0 && (
+            <div className="p-5 rounded-2xl bg-cyan-950/20 border border-[#06B6D4]/30">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2 font-bold">
+                <BrainCircuit className="w-4 h-4 text-[#06B6D4]" />
+                <span>AI Architecture &amp; Integrations</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {modalDetails.aiComponents.map((aiComp, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-cyan-200"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4]" />
+                    <span>{aiComp}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Key Features */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-wider text-[#06B6D4] mb-4 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
               <Layers className="w-4 h-4" />
               <span>Key Features</span>
             </h3>
@@ -128,7 +166,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Technologies Used */}
           <div>
-            <h3 className="text-sm font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#06B6D4] mb-3 flex items-center gap-2">
               <Cpu className="w-4 h-4" />
               <span>Technologies</span>
             </h3>
@@ -146,7 +184,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Architecture */}
           <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-            <h3 className="text-sm font-mono uppercase tracking-wider text-indigo-300 mb-2 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-indigo-300 mb-2 flex items-center gap-2">
               <Cpu className="w-4 h-4" />
               <span>Architecture</span>
             </h3>
@@ -182,7 +220,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Footer Actions */}
         <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            {/* Show GitHub only if valid URL exists */}
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
@@ -195,7 +232,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </a>
             )}
 
-            {/* Show Live Demo only if valid URL exists */}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
@@ -213,7 +249,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             onClick={onClose}
             className="px-6 py-2.5 rounded-xl text-xs font-semibold text-white glass-panel border border-white/20 hover:bg-white/10 transition-colors ml-auto cursor-pointer"
           >
-            Close Details
+            Close Case Study
           </button>
         </div>
       </div>

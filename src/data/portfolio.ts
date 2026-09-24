@@ -2,11 +2,14 @@ export interface ProjectDetail {
   overview: string
   problem: string
   solution: string
-  features: string[]
-  technologies: string[]
   architecture: string
+  technologies: string[]
+  aiComponents?: string[]
+  features: string[]
   challenges: string
   whatILearned: string
+  videoDemoUrl?: string
+  posterUrl?: string
 }
 
 export interface Project {
@@ -20,13 +23,22 @@ export interface Project {
   modalDetails: ProjectDetail
   githubUrl?: string
   liveUrl?: string
+  videoUrl?: string
   gradient: string
   themeColor: string
 }
 
+export interface SkillItem {
+  name: string
+  category: string
+  description: string
+  isAiHighlight?: boolean
+  relatedProjects?: string[]
+}
+
 export interface SkillCategory {
   title: string
-  skills: { name: string; isAiHighlight?: boolean }[]
+  skills: SkillItem[]
 }
 
 export interface ExperienceItem {
@@ -51,12 +63,29 @@ export interface CertificationItem {
   name: string
   issuer: string
   status: 'Completed' | 'In Progress'
+  certificateFile?: string
 }
 
 export interface LanguageItem {
   language: string
   proficiency: string
   levelTag: string
+}
+
+export interface AIConcept {
+  id: string
+  name: string
+  tag: string
+  description: string
+  workflowRole: string
+}
+
+export interface WorkflowStep {
+  step: string
+  title: string
+  action: string
+  agentRole: string
+  iconType: string
 }
 
 export const PERSONAL_INFO = {
@@ -70,6 +99,7 @@ export const PERSONAL_INFO = {
   github: 'https://github.com',
   graduationDate: 'June 2027',
   internshipTarget: 'Final-year internship (PFE) starting February 2027',
+  profilePhotoPath: '/images/profile.jpg',
   summary:
     'Software Engineering student specializing in Web Development and Information Systems, seeking a final-year internship (PFE) starting February 2027. Full-stack developer experienced in building web applications with React, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, and MySQL. Hands-on experience integrating AI capabilities including LLM APIs, RAG pipelines, embeddings, chatbots, and prompt engineering. Strong interest in AI-powered applications, scalable web systems, and modern software development. Expected graduation: June 2027.',
   aboutBadges: [
@@ -80,75 +110,222 @@ export const PERSONAL_INFO = {
   ],
 }
 
+export const HERO_ROTATING_ROLES = [
+  'Full-Stack Developer',
+  'AI Builder',
+  'React Developer',
+  'Backend Developer',
+  'AI Agents Explorer',
+]
+
+export const AI_AGENT_CONCEPTS: AIConcept[] = [
+  {
+    id: 'ai-agents',
+    name: 'AI Agents',
+    tag: 'Agentic Workflows',
+    description:
+      'Exploring agent-based workflows where AI models can reason, use tools, and execute multi-step tasks.',
+    workflowRole: 'Autonomous Reasoning & Task Orchestration',
+  },
+  {
+    id: 'mcp',
+    name: 'MCP',
+    tag: 'Protocol Standard',
+    description:
+      'Exploring Model Context Protocol for connecting AI systems with external tools and services.',
+    workflowRole: 'Standardized Tool Interface & Context Exchange',
+  },
+  {
+    id: 'rag',
+    name: 'RAG',
+    tag: 'Context Augmentation',
+    description:
+      'Retrieval-Augmented Generation workflows using vector search and embeddings.',
+    workflowRole: 'Dynamic Context Retrieval from Vector Databases',
+  },
+  {
+    id: 'deepseek',
+    name: 'DeepSeek',
+    tag: 'Reasoning Engine',
+    description:
+      'Leveraging DeepSeek models and reasoning engines (DeepSeek R1) for automated summaries and analytical queries.',
+    workflowRole: 'Automated Summarization & Inferential Reasoning',
+  },
+  {
+    id: 'chromadb',
+    name: 'ChromaDB',
+    tag: 'Vector Storage',
+    description:
+      'Vector database used for persistent embedding storage and high-similarity context retrieval in RAG pipelines.',
+    workflowRole: 'Vector Store & Nearest Neighbor Search',
+  },
+  {
+    id: 'bge-m3',
+    name: 'BGE-M3 Embeddings',
+    tag: 'Dense Representation',
+    description:
+      'Dense multi-lingual vector representations supporting multi-modal search and RAG contexts.',
+    workflowRole: 'High-Dimensional Semantic Embedding Generation',
+  },
+  {
+    id: 'prompt-eng',
+    name: 'Prompt Engineering',
+    tag: 'Structured Input',
+    description:
+      'Designing structured instructions, system roles, and schemas for deterministic model outputs.',
+    workflowRole: 'Context Framing & Instruction Tuning',
+  },
+  {
+    id: 'llm-api',
+    name: 'LLM API Integration',
+    tag: 'Service Connectivity',
+    description:
+      'Integrating state-of-the-art language model APIs into robust Node.js and full-stack pipelines.',
+    workflowRole: 'API Middleware & Streaming Communication',
+  },
+  {
+    id: 'a2a',
+    name: 'A2A',
+    tag: 'Multi-Agent Systems',
+    description:
+      'Exploring Agent-to-Agent communication and cooperative task delegation architectures.',
+    workflowRole: 'Inter-Agent Messaging & Coordination',
+  },
+]
+
+export const CONCEPTUAL_PIPELINE = [
+  { label: 'USER', role: 'Human Intent', icon: 'user' },
+  { label: 'PROMPT', role: 'Structured Context', icon: 'terminal' },
+  { label: 'AI AGENT', role: 'Autonomous Engine', icon: 'bot' },
+  { label: 'TOOLS / MCP', role: 'External Interfaces', icon: 'wrench' },
+  { label: 'RAG / DATABASE', role: 'Vector & Relational Knowledge', icon: 'database' },
+  { label: 'LLM', role: 'Inference & Synthesis', icon: 'cpu' },
+  { label: 'RESPONSE', role: 'Validated Output', icon: 'sparkles' },
+]
+
+export const HOW_I_BUILD_WITH_AI_STEPS: WorkflowStep[] = [
+  {
+    step: '01',
+    title: 'Define',
+    action: 'I define the problem and desired outcome.',
+    agentRole: 'Human sets boundaries and business requirements',
+    iconType: 'target',
+  },
+  {
+    step: '02',
+    title: 'Plan',
+    action: 'I break the problem into smaller technical tasks.',
+    agentRole: 'Human architectures the system and dependencies',
+    iconType: 'git-branch',
+  },
+  {
+    step: '03',
+    title: 'Prompt',
+    action: 'I provide structured context and requirements.',
+    agentRole: 'Human engineers structured input & schemas',
+    iconType: 'terminal',
+  },
+  {
+    step: '04',
+    title: 'Build',
+    action: 'AI agents help generate and modify implementation.',
+    agentRole: 'AI Agent proposes code against established patterns',
+    iconType: 'cpu',
+  },
+  {
+    step: '05',
+    title: 'Review',
+    action: 'I inspect, test, debug and validate the generated work.',
+    agentRole: 'Human validates logic, security, and edge cases',
+    iconType: 'check-circle-2',
+  },
+  {
+    step: '06',
+    title: 'Iterate',
+    action: 'I refine the implementation until it matches the expected result.',
+    agentRole: 'Continuous testing & quality assurance by human engineer',
+    iconType: 'refresh-cw',
+  },
+]
+
+export const WORKFLOW_LABELS = [
+  'Human',
+  'AI Agent',
+  'Tools',
+  'Code',
+  'Testing',
+  'Human Review',
+]
+
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     title: 'Frontend',
     skills: [
-      { name: 'React' },
-      { name: 'Next.js' },
-      { name: 'TypeScript' },
-      { name: 'JavaScript' },
-      { name: 'Tailwind CSS' },
-      { name: 'HTML' },
-      { name: 'CSS' },
+      { name: 'React', category: 'Frontend', description: 'Component-driven interactive web applications', relatedProjects: ['StudyMate', 'TravelScape', 'Decathlon Posture Coach'] },
+      { name: 'Next.js', category: 'Frontend', description: 'Modern React framework for performant web systems', relatedProjects: ['Full-Stack Architectures'] },
+      { name: 'TypeScript', category: 'Frontend', description: 'Strict type safety and robust code maintainability', relatedProjects: ['StudyMate', 'Decathlon Posture Coach'] },
+      { name: 'JavaScript', category: 'Frontend', description: 'Core ES6+ scripting, asynchronous programming', relatedProjects: ['TravelScape', 'Web Applications'] },
+      { name: 'Tailwind CSS', category: 'Frontend', description: 'Utility-first styling, glassmorphism, responsive UI', relatedProjects: ['Decathlon Posture Coach', 'Portfolio'] },
+      { name: 'HTML', category: 'Frontend', description: 'Semantic, accessible structure and web standards', relatedProjects: ['All Projects'] },
+      { name: 'CSS', category: 'Frontend', description: 'Modern layouts, flexbox, grid, and CSS animations', relatedProjects: ['All Projects'] },
     ],
   },
   {
     title: 'Backend',
     skills: [
-      { name: 'Node.js' },
-      { name: 'Express.js' },
-      { name: 'REST APIs' },
+      { name: 'Node.js', category: 'Backend', description: 'Server-side runtime for high-throughput APIs', relatedProjects: ['StudyMate', 'TravelScape', 'Decathlon Posture Coach'] },
+      { name: 'Express.js', category: 'Backend', description: 'RESTful API routing and middleware architectures', relatedProjects: ['TravelScape', 'API Services'] },
+      { name: 'REST APIs', category: 'Backend', description: 'Structured JSON communication and endpoint design', relatedProjects: ['StudyMate', 'TravelScape', 'Decathlon Posture Coach'] },
     ],
   },
   {
     title: 'Databases',
     skills: [
-      { name: 'PostgreSQL' },
-      { name: 'MongoDB' },
-      { name: 'MySQL' },
-      { name: 'Prisma' },
+      { name: 'PostgreSQL', category: 'Databases', description: 'Relational data modeling and structured query execution', relatedProjects: ['Data Modeling'] },
+      { name: 'MongoDB', category: 'Databases', description: 'Document-oriented database for dynamic collections', relatedProjects: ['TravelScape'] },
+      { name: 'MySQL', category: 'Databases', description: 'Relational schemas, transactions, and indexing', relatedProjects: ['StudyMate'] },
+      { name: 'Prisma', category: 'Databases', description: 'Type-safe ORM for database operations and migrations', relatedProjects: ['Database Systems'] },
     ],
   },
   {
     title: 'AI & Data',
     skills: [
-      { name: 'LLM API Integration', isAiHighlight: true },
-      { name: 'DeepSeek', isAiHighlight: true },
-      { name: 'Retrieval-Augmented Generation (RAG)', isAiHighlight: true },
-      { name: 'ChromaDB', isAiHighlight: true },
-      { name: 'BGE-M3 Embeddings', isAiHighlight: true },
-      { name: 'Prompt Engineering', isAiHighlight: true },
-      { name: 'AI Agents', isAiHighlight: true },
-      { name: 'MCP', isAiHighlight: true },
-      { name: 'A2A', isAiHighlight: true },
+      { name: 'LLM API Integration', category: 'AI & Data', description: 'Connecting full-stack apps to frontier model APIs', isAiHighlight: true, relatedProjects: ['StudyMate', 'Decathlon Posture Coach'] },
+      { name: 'DeepSeek', category: 'AI & Data', description: 'Automated summaries and reasoning with DeepSeek R1', isAiHighlight: true, relatedProjects: ['StudyMate', 'Decathlon Posture Coach'] },
+      { name: 'RAG', category: 'AI & Data', description: 'Retrieval-Augmented Generation for grounded answers', isAiHighlight: true, relatedProjects: ['StudyMate'] },
+      { name: 'ChromaDB', category: 'AI & Data', description: 'Vector store for document embeddings and similarity search', isAiHighlight: true, relatedProjects: ['StudyMate'] },
+      { name: 'BGE-M3 Embeddings', category: 'AI & Data', description: 'Dense multilingual embeddings for semantic retrieval', isAiHighlight: true, relatedProjects: ['StudyMate'] },
+      { name: 'Prompt Engineering', category: 'AI & Data', description: 'Structured prompt design, schemas, and few-shot patterns', isAiHighlight: true, relatedProjects: ['StudyMate', 'Decathlon Posture Coach'] },
+      { name: 'AI Agents', category: 'AI & Data', description: 'Exploring agentic decision loops, tools, and execution', isAiHighlight: true, relatedProjects: ['Agentic Exploration'] },
+      { name: 'MCP', category: 'AI & Data', description: 'Model Context Protocol for tool and resource integration', isAiHighlight: true, relatedProjects: ['Protocol Integration'] },
+      { name: 'A2A', category: 'AI & Data', description: 'Agent-to-Agent multi-agent collaboration architectures', isAiHighlight: true, relatedProjects: ['Multi-Agent Systems'] },
     ],
   },
   {
     title: 'Cloud & DevOps',
     skills: [
-      { name: 'Microsoft Azure' },
-      { name: 'Git' },
-      { name: 'GitHub' },
-      { name: 'Docker' },
-      { name: 'CI/CD' },
+      { name: 'Microsoft Azure', category: 'Cloud & DevOps', description: 'Cloud fundamentals, resource management, AZ-900 certified', relatedProjects: ['Azure Fundamentals'] },
+      { name: 'Git', category: 'Cloud & DevOps', description: 'Version control, branching strategies, and collaboration', relatedProjects: ['All Projects'] },
+      { name: 'GitHub', category: 'Cloud & DevOps', description: 'Source code management, repositories, collaboration', relatedProjects: ['All Projects'] },
+      { name: 'Docker', category: 'Cloud & DevOps', description: 'Containerization of applications and services', relatedProjects: ['StudyMate'] },
+      { name: 'CI/CD', category: 'Cloud & DevOps', description: 'Automated build and deployment pipelines', relatedProjects: ['DevOps Workflows'] },
     ],
   },
   {
-    title: 'Tools & UI/UX',
+    title: 'Tools',
     skills: [
-      { name: 'Figma' },
-      { name: 'Postman' },
-      { name: 'VS Code' },
-      { name: 'UI/UX Design Principles' },
+      { name: 'Figma', category: 'Tools', description: 'UI/UX wireframing, component design systems, prototyping', relatedProjects: ['UI/UX Design'] },
+      { name: 'Postman', category: 'Tools', description: 'API endpoint testing, request validation, and documentation', relatedProjects: ['StudyMate', 'TravelScape'] },
+      { name: 'VS Code', category: 'Tools', description: 'Primary IDE, debugging, and development environment', relatedProjects: ['All Projects'] },
+      { name: 'UI/UX Design Principles', category: 'Tools', description: 'Visual hierarchy, accessibility, and user-centric design', relatedProjects: ['TravelScape', 'Portfolio'] },
     ],
   },
   {
     title: 'Methodologies',
     skills: [
-      { name: 'Agile' },
-      { name: 'Scrum' },
-      { name: 'Technical Documentation' },
+      { name: 'Agile', category: 'Methodologies', description: 'Iterative development, sprint cycles, and adaptive planning', relatedProjects: ['Team Collaboration'] },
+      { name: 'Scrum', category: 'Methodologies', description: 'Sprint planning, reviews, and backlog management', relatedProjects: ['ISSAT Projects'] },
+      { name: 'Technical Documentation', category: 'Methodologies', description: 'Architecture specifications, API docs, and user guides', relatedProjects: ['Academic & Project Docs'] },
     ],
   },
 ]
@@ -161,6 +338,7 @@ export const PROJECTS: Project[] = [
     category: 'AI & Full-Stack Platform',
     themeColor: '#6366F1',
     gradient: 'from-indigo-600 via-indigo-500 to-cyan-400',
+    videoUrl: '/videos/studymate-demo.mp4',
     technologies: [
       'React',
       'TypeScript',
@@ -209,6 +387,12 @@ export const PROJECTS: Project[] = [
         'Gamification mechanics including streaks and learning milestones',
         'Bilingual user interface for flexible language preferences',
       ],
+      aiComponents: [
+        'DeepSeek LLM Integration for summarization',
+        'ChromaDB Vector Database for context retrieval',
+        'BGE-M3 Multilingual Embedding Pipeline',
+        'RAG Chatbot with grounded prompt architecture',
+      ],
       technologies: [
         'React',
         'TypeScript',
@@ -226,8 +410,8 @@ export const PROJECTS: Project[] = [
         'Orchestrating dense embedding retrieval via BGE-M3 and ChromaDB with low latency, handling bilingual text tokenization and UI switching, and synchronizing spaced-repetition schedules with gamified streak tracking.',
       whatILearned:
         'End-to-end RAG architecture design, practical vector database operations, prompt engineering for academic summarization, Docker container orchestration, and stateful full-stack TypeScript application design.',
+      videoDemoUrl: '/videos/studymate-demo.mp4',
     },
-    // No URLs invented as per strict instructions:
     githubUrl: undefined,
     liveUrl: undefined,
   },
@@ -238,6 +422,7 @@ export const PROJECTS: Project[] = [
     category: 'Full-Stack Web & 3D UI',
     themeColor: '#06B6D4',
     gradient: 'from-cyan-500 via-teal-500 to-indigo-600',
+    videoUrl: '/videos/travelscape-demo.mp4',
     technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Leaflet'],
     highlights: [
       '3D animated hero',
@@ -280,6 +465,10 @@ export const PROJECTS: Project[] = [
         'Community reviews and destination rating system',
         'Admin CRUD dashboard for managing listings and bookings',
       ],
+      aiComponents: [
+        'Multilingual conversational assistant chatbot',
+        'Geospatial coordinate mapping with Leaflet',
+      ],
       technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Leaflet'],
       architecture:
         'Client-side single-page application built with React, featuring Leaflet for mapping. Communicates through RESTful API routes with an Express.js and Node.js server, persisting destination, user, booking, and review records in MongoDB.',
@@ -287,6 +476,7 @@ export const PROJECTS: Project[] = [
         'Balancing interactive 3D elements and smooth map rendering with web performance, handling multilingual bot conversations, and designing a secure role-based admin CRUD workflow.',
       whatILearned:
         'Full-stack MERN development lifecycle, RESTful API design patterns, Leaflet geographic integrations, component state synchronization, and modern glassmorphic design principles.',
+      videoDemoUrl: '/videos/travelscape-demo.mp4',
     },
     githubUrl: undefined,
     liveUrl: undefined,
@@ -298,6 +488,7 @@ export const PROJECTS: Project[] = [
     category: 'AI & Health Tech',
     themeColor: '#3B82F6',
     gradient: 'from-blue-600 via-indigo-600 to-sky-400',
+    videoUrl: '/videos/decathlon-demo.mp4',
     technologies: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'DeepSeek R1'],
     highlights: [
       'AI exercise recommendations',
@@ -324,6 +515,11 @@ export const PROJECTS: Project[] = [
         'Automated product matching connecting workouts to Decathlon equipment',
         'Streamlined, responsive user experience styled with Tailwind CSS',
       ],
+      aiComponents: [
+        'DeepSeek R1 Reasoning Model Integration',
+        '873+ Exercise Recommendation Pipeline',
+        'Automated Decathlon Product Matching Algorithm',
+      ],
       technologies: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'DeepSeek R1'],
       architecture:
         'React and TypeScript frontend styled with Tailwind CSS, querying a Node.js API backend that coordinates DeepSeek R1 reasoning prompts against an 873+ exercise dataset and Decathlon product catalog.',
@@ -331,6 +527,7 @@ export const PROJECTS: Project[] = [
         'Engineering accurate prompts for DeepSeek R1 to ensure ergonomically sound exercise recommendations and consistently mapping them to the proper Decathlon product inventory.',
       whatILearned:
         'Prompt optimization with reasoning models (DeepSeek R1), catalog search and attribute matching architectures, and delivering clean, responsive fitness UIs.',
+      videoDemoUrl: '/videos/decathlon-demo.mp4',
     },
     githubUrl: undefined,
     liveUrl: undefined,
@@ -367,16 +564,19 @@ export const CERTIFICATIONS: CertificationItem[] = [
     name: 'Web Development Certification',
     issuer: 'Udemy',
     status: 'Completed',
+    certificateFile: '/certificates/udemy-web-dev.pdf',
   },
   {
     name: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
     issuer: 'Microsoft',
     status: 'Completed',
+    certificateFile: '/certificates/azure-az900.pdf',
   },
   {
     name: 'AI Agents: Intensive Vibe Coding Course',
     issuer: 'Google',
     status: 'In Progress',
+    certificateFile: '/certificates/google-ai-agents.pdf',
   },
 ]
 
@@ -400,5 +600,56 @@ export const LANGUAGES: LanguageItem[] = [
     language: 'German',
     proficiency: 'Basic',
     levelTag: 'Elementary proficiency',
+  },
+]
+
+export interface AssistantFAQ {
+  question: string
+  answer: string
+  tags: string[]
+}
+
+export const ASSISTANT_KNOWLEDGE_BASE: AssistantFAQ[] = [
+  {
+    question: 'What projects has Mariem built?',
+    answer:
+      'Mariem has built three featured platforms: 1) StudyMate, a full-stack AI study platform with DeepSeek summaries, RAG chatbot (ChromaDB + BGE-M3), Docker, and MySQL; 2) TravelScape, a MERN travel booking platform with 3D hero, glassmorphism, Leaflet maps, and admin CRUD; and 3) Decathlon Posture Coach, an AI fitness app with DeepSeek R1 reasoning matching 873+ exercises with Decathlon products.',
+    tags: ['projects', 'studymate', 'travelscape', 'decathlon'],
+  },
+  {
+    question: 'What AI technologies does she use?',
+    answer:
+      'Mariem works with LLM API integrations, DeepSeek reasoning models (including DeepSeek R1), Retrieval-Augmented Generation (RAG) pipelines, ChromaDB vector database, BGE-M3 dense embeddings, prompt engineering, and is actively exploring AI Agents, MCP (Model Context Protocol), and A2A concepts.',
+    tags: ['ai', 'technologies', 'llm', 'rag', 'deepseek', 'mcp'],
+  },
+  {
+    question: 'Tell me about StudyMate.',
+    answer:
+      'StudyMate is a full-stack AI-powered study platform built using React, TypeScript, Node.js, MySQL, and Docker. It integrates DeepSeek for automated course summaries, a RAG chatbot using ChromaDB with BGE-M3 embeddings, adaptive quizzes, spaced-repetition flashcards, study planning, gamified streak tracking, and a bilingual interface.',
+    tags: ['studymate', 'rag', 'deepseek', 'education', 'mysql'],
+  },
+  {
+    question: "What is Mariem's experience with AI agents?",
+    answer:
+      'Mariem explores agent-based workflows where models reason and use tools (MCP), and is currently participating in the "AI Agents: Intensive Vibe Coding Course" by Google (In Progress). She focuses on practical agent tool execution, prompt structuring, and multi-agent coordination (A2A).',
+    tags: ['ai agents', 'agents', 'google', 'mcp', 'a2a'],
+  },
+  {
+    question: 'What technologies does she use for backend development?',
+    answer:
+      'For backend systems, Mariem uses Node.js, Express.js, and REST APIs, paired with databases like PostgreSQL, MongoDB, MySQL, and Prisma ORM, containerized with Docker.',
+    tags: ['backend', 'node', 'express', 'mysql', 'mongodb', 'postgresql'],
+  },
+  {
+    question: 'How does she use RAG?',
+    answer:
+      'In StudyMate, Mariem implemented a Retrieval-Augmented Generation pipeline using BGE-M3 dense multilingual embeddings and ChromaDB vector store. This allows students to ask questions grounded directly in course materials with low-latency contextual retrieval.',
+    tags: ['rag', 'retrieval', 'embeddings', 'chromadb', 'bge-m3'],
+  },
+  {
+    question: 'Where is Mariem located and when does she graduate?',
+    answer:
+      'Mariem is based in Nabeul, Tunisia. She is pursuing a Bachelor\'s Degree in Software Engineering and Information Systems at ISSAT (2024 – Expected June 2027) and is seeking a final-year internship (PFE) starting February 2027.',
+    tags: ['location', 'graduation', 'issat', 'pfe', 'contact'],
   },
 ]
