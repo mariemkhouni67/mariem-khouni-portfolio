@@ -84,6 +84,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <span>Project Demo Walkthrough</span>
             </h3>
             <VideoDemo
+              projectId={project.id}
               projectTitle={project.title}
               videoUrl={modalDetails.videoDemoUrl}
               posterUrl={modalDetails.posterUrl}
