@@ -33,11 +33,10 @@ Designed with a light-first **White + Pink + Modern + Futuristic + Highly Animat
 - **Showcase 1**: **StudyMate** — Full-stack AI study platform (DeepSeek, ChromaDB vector store, BGE-M3 RAG pipeline, Docker, MySQL, gamified learning).
 - **Showcase 2**: **TravelScape** — Full-stack MERN travel booking platform with 3D hero, Leaflet geospatial mapping, multilingual chatbot, and admin CRUD.
 - **Showcase 3**: **Decathlon Posture Coach** — AI fitness app leveraging DeepSeek R1 reasoning across 873+ exercises matched with Decathlon products.
-- **Video Demo Player & In-Browser Upload**:
-  - Live drag-and-drop video upload (`.mp4`, `.webm`, `.mov`).
-  - Persistent **IndexedDB storage** so uploaded walkthrough videos remain available across browser refreshes.
-  - Custom video controls (Scrubber, Play/Pause, Mute/Unmute, Fullscreen, metadata badge).
-  - Production fallback path `/public/videos/<id>-demo.mp4`.
+- **High-Definition Video Demo Players**:
+  - Interactive walkthrough video player embedded directly in each showcase card and deep-dive modal.
+  - Custom video controls (Scrubber, Play/Pause, Mute/Unmute, Fullscreen, timing display).
+  - High-performance streaming of MP4 walkthroughs from `/public/videos/`.
 
 ### 5. Grounded AI Portfolio Assistant
 - Floating **"Ask Mariem's AI"** chat panel grounded strictly on factual portfolio data with zero hallucination.
@@ -59,7 +58,7 @@ Designed with a light-first **White + Pink + Modern + Futuristic + Highly Animat
 | **Frontend Framework** | React 19, TypeScript, Vite |
 | **Styling & Motion** | Tailwind CSS v4, Glassmorphism, CSS Keyframe Physics |
 | **3D Graphics** | Three.js |
-| **Persistence** | Native IndexedDB (video storage), LocalStorage (preferences) |
+| **Persistence** | LocalStorage (user preferences & theme state) |
 | **Icons** | Lucide React + Custom SVG Brand Monograms |
 | **Quality & Types** | Strict TypeScript (`verbatimModuleSyntax`, `noUnusedLocals`) |
 

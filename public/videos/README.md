@@ -1,10 +1,9 @@
-# Videos Vault
+# Project Demo Videos
 
-Place pre-recorded walkthrough MP4 demo videos for your projects in this directory:
+Project walkthrough MP4 demo videos:
 
-- `studymate-demo.mp4`
-- `travelscape-demo.mp4`
-- `decathlon-posture-coach-demo.mp4`
+- `studyai-demo.mp4` — StudyMate AI Platform
+- `travelscape-demo.mp4` — TravelScape MERN Platform
+- `decathlon-posture-coach-demo.mp4` — Decathlon Posture Coach
 
-Files placed in this folder will be deployed with the portfolio and streamable at `/videos/<filename>`.
-Note: Visitors can also upload and preview videos directly in the browser via the interactive video player (saved in IndexedDB).
+Files placed in this folder are publicly streamable at `/videos/<filename>.mp4`.

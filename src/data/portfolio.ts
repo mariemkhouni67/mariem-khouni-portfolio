@@ -346,7 +346,7 @@ export const PROJECTS: Project[] = [
     category: 'AI & Full-Stack Platform',
     themeColor: '#6366F1',
     gradient: 'from-indigo-600 via-indigo-500 to-cyan-400',
-    videoUrl: '/videos/studymate-demo.mp4',
+    videoUrl: '/videos/studyai-demo.mp4',
     technologies: [
       'React',
       'TypeScript',
@@ -418,7 +418,7 @@ export const PROJECTS: Project[] = [
         'Orchestrating dense embedding retrieval via BGE-M3 and ChromaDB with low latency, handling bilingual text tokenization and UI switching, and synchronizing spaced-repetition schedules with gamified streak tracking.',
       whatILearned:
         'End-to-end RAG architecture design, practical vector database operations, prompt engineering for academic summarization, Docker container orchestration, and stateful full-stack TypeScript application design.',
-      videoDemoUrl: '/videos/studymate-demo.mp4',
+      videoDemoUrl: '/videos/studyai-demo.mp4',
     },
     githubUrl: undefined,
     liveUrl: undefined,
@@ -496,7 +496,7 @@ export const PROJECTS: Project[] = [
     category: 'AI & Health Tech',
     themeColor: '#3B82F6',
     gradient: 'from-blue-600 via-indigo-600 to-sky-400',
-    videoUrl: '/videos/decathlon-demo.mp4',
+    videoUrl: '/videos/decathlon-posture-coach-demo.mp4',
     technologies: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'DeepSeek R1'],
     highlights: [
       'AI exercise recommendations',
@@ -535,7 +535,7 @@ export const PROJECTS: Project[] = [
         'Engineering accurate prompts for DeepSeek R1 to ensure ergonomically sound exercise recommendations and consistently mapping them to the proper Decathlon product inventory.',
       whatILearned:
         'Prompt optimization with reasoning models (DeepSeek R1), catalog search and attribute matching architectures, and delivering clean, responsive fitness UIs.',
-      videoDemoUrl: '/videos/decathlon-demo.mp4',
+      videoDemoUrl: '/videos/decathlon-posture-coach-demo.mp4',
     },
     githubUrl: undefined,
     liveUrl: undefined,

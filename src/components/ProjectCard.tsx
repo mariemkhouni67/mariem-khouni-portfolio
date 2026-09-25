@@ -233,9 +233,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               renderVisualMockup()
             ) : (
               <VideoDemo
-                projectId={project.id}
                 projectTitle={project.title}
-                videoUrl={project.modalDetails.videoDemoUrl}
+                videoUrl={project.modalDetails.videoDemoUrl || project.videoUrl}
                 posterUrl={project.modalDetails.posterUrl}
               />
             )}

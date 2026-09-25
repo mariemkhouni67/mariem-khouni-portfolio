@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mariemkhouni67.github.io/mariem-khouni-portfolio/sitemap.xml
