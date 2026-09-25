@@ -24,7 +24,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   index,
   onSelect,
 }) => {
-  const [activeVisualTab, setActiveVisualTab] = useState<'mockup' | 'video'>('mockup')
+  const [activeVisualTab, setActiveVisualTab] = useState<'mockup' | 'video'>('video')
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovered, setIsHovered] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -194,20 +194,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             isEven ? 'order-1' : 'order-1 lg:order-2'
           }`}
         >
-          {/* Visual Mode Switcher (Mockup vs. Video Demo) */}
+          {/* Visual Mode Switcher (Video Demo vs. Mockup) */}
           <div className="flex items-center justify-between mb-4">
             <div className="inline-flex items-center gap-1.5 p-1 rounded-xl bg-[#FFF8FC] border border-[#F3D6E5] shadow-xs">
-              <button
-                onClick={() => setActiveVisualTab('mockup')}
-                className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
-                  activeVisualTab === 'mockup'
-                    ? 'bg-white text-[#EC4899] shadow-xs border border-[#FBCFE8]'
-                    : 'text-[#71717A] hover:text-[#18181B]'
-                }`}
-                data-cursor="interactive"
-              >
-                Architecture Mockup
-              </button>
               <button
                 onClick={() => setActiveVisualTab('video')}
                 className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
@@ -220,6 +209,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <Video className="w-3.5 h-3.5" />
                 <span>Video Demo</span>
               </button>
+              <button
+                onClick={() => setActiveVisualTab('mockup')}
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer ${
+                  activeVisualTab === 'mockup'
+                    ? 'bg-white text-[#EC4899] shadow-xs border border-[#FBCFE8]'
+                    : 'text-[#71717A] hover:text-[#18181B]'
+                }`}
+                data-cursor="interactive"
+              >
+                Architecture Mockup
+              </button>
             </div>
 
             <span className="text-[11px] font-mono text-[#DB2777] font-semibold hidden sm:inline-block">
@@ -229,14 +229,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Active Visual Render */}
           <div className="relative transition-all duration-300">
-            {activeVisualTab === 'mockup' ? (
-              renderVisualMockup()
-            ) : (
+            {activeVisualTab === 'video' ? (
               <VideoDemo
                 projectTitle={project.title}
                 videoUrl={project.modalDetails.videoDemoUrl || project.videoUrl}
                 posterUrl={project.modalDetails.posterUrl}
               />
+            ) : (
+              renderVisualMockup()
             )}
           </div>
         </div>
