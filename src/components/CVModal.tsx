@@ -122,7 +122,14 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
               <span className="text-[#F472B6]">&bull;</span>
               <span className="flex items-center gap-1.5">
                 <LinkedInIcon className="w-3.5 h-3.5 text-[#EC4899]" />
-                linkedin.com/in/mariem-khouni
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline hover:text-[#EC4899] transition-colors"
+                >
+                  linkedin.com/in/mariem-khouni-691b01381
+                </a>
               </span>
             </div>
           </div>

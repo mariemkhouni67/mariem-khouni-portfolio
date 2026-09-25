@@ -95,7 +95,7 @@ export const PERSONAL_INFO = {
   location: 'Nabeul, Tunisia',
   phone: '+216 94 852 832',
   email: 'mariem.khouni@outlook.com',
-  linkedin: 'https://linkedin.com/in/mariem-khouni',
+  linkedin: 'https://www.linkedin.com/in/mariem-khouni-691b01381/',
   github: 'https://github.com/mariemkhouni67',
   graduationDate: 'June 2027',
   internshipTarget: 'Final-year internship (PFE) starting February 2027',
