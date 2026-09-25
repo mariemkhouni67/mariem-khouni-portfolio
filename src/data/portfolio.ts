@@ -96,7 +96,7 @@ export const PERSONAL_INFO = {
   phone: '+216 94 852 832',
   email: 'mariem.khouni@outlook.com',
   linkedin: 'https://linkedin.com/in/mariem-khouni',
-  github: 'https://github.com/mariemkhouni',
+  github: 'https://github.com/mariemkhouni67',
   graduationDate: 'June 2027',
   internshipTarget: 'Final-year internship (PFE) starting February 2027',
   profilePhotoPath: '/images/profile.jpg',

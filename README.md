@@ -133,7 +133,7 @@ portfolio/
 
 ```bash
 # Clone the repository
-git clone https://github.com/mariemkhouni/mariem-khouni-portfolio.git
+git clone https://github.com/mariemkhouni67/mariem-khouni-portfolio.git
 
 # Enter project directory
 cd mariem-khouni-portfolio
@@ -162,7 +162,7 @@ npm run preview
 ## 🌐 Deployment Instructions
 
 ### Deploy to Vercel (Recommended)
-1. Push this repository to GitHub: `https://github.com/mariemkhouni/mariem-khouni-portfolio`.
+1. Push this repository to GitHub: `https://github.com/mariemkhouni67/mariem-khouni-portfolio`.
 2. Go to [Vercel Dashboard](https://vercel.com/) and click **"Add New Project"**.
 3. Import `mariem-khouni-portfolio`.
 4. Framework Preset: **Vite**.
@@ -191,7 +191,7 @@ npm run preview
 - **Location**: Nabeul, Tunisia
 - **Email**: [mariem.khouni@outlook.com](mailto:mariem.khouni@outlook.com)
 - **LinkedIn**: [linkedin.com/in/mariem-khouni](https://linkedin.com/in/mariem-khouni)
-- **GitHub**: [github.com/mariemkhouni](https://github.com/mariemkhouni)
+- **GitHub**: [github.com/mariemkhouni67](https://github.com/mariemkhouni67)
 - **Target Position**: End-of-Studies Internship (PFE) starting **February 2027**
 
 ---
